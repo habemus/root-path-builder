@@ -1,0 +1,17 @@
+{
+  "name": "root-path-builder",
+  "version": "0.0.0",
+  "description": "",
+  "main": "lib/root-path-builder.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-istanbul": "^1.0.0",
+    "gulp-mocha": "^3.0.0",
+    "should": "^11.0.0"
+  }
+}
