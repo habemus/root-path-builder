@@ -48,5 +48,15 @@ describe('rootPathBuilder#prependTo', function () {
       root.prependTo('/.');
     }, rootPathBuilder.errors.IllegalPath);
   });
+
+  it('should handle poison null bytes with IllegalPath error', function () {
+    // https://docs.nodejitsu.com/articles/file-system/security/introduction/
+    // https://github.com/simonfan/docs/blob/master/pages/articles/file-system/security/introduction/content.md
+    var root = rootPathBuilder('/root/path');
+
+    assert.throws(function () {
+      root.prependTo('some/../path\0')
+    }, rootPathBuilder.errors.IllegalPath);
+  });
   
 });

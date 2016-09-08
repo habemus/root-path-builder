@@ -9,11 +9,15 @@ describe('rootPathBuilder', function () {
 
     assert.throws(function () {
       var root = rootPathBuilder();
-    }, TypeError);
+    }, rootPathBuilder.errors.IllegalPath);
 
     assert.throws(function () {
       var root = rootPathBuilder('some/not/absolute/path');
-    }, TypeError);
+    }, rootPathBuilder.errors.IllegalPath);
+
+    assert.throws(function () {
+      var root = rootPathBuilder('/some/not/absolute/path\0');
+    }, rootPathBuilder.errors.IllegalPath);
     
   });
 
@@ -53,6 +57,15 @@ describe('rootPathBuilder', function () {
 
     assert.throws(function () {
       root('../outside');
+    }, rootPathBuilder.errors.IllegalPath);
+  });
+
+  it('should throw IllegalPath error if there is a poison null byte', function () {
+    // https://docs.nodejitsu.com/articles/file-system/security/introduction/
+    // https://github.com/simonfan/docs/blob/master/pages/articles/file-system/security/introduction/content.md
+    assert.throws(function () {
+      var root = rootPathBuilder('/root/path');
+      root('path\0');
     }, rootPathBuilder.errors.IllegalPath);
   });
 
