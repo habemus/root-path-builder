@@ -1,6 +1,6 @@
 {
   "name": "root-path-builder",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0",
   "description": "",
   "main": "lib/root-path-builder.js",
   "scripts": {
